@@ -35,26 +35,26 @@ class Transformer:
             self.e2 = 0.00669438
         elif model == 'krasowski':
             self.a = 6378245
-            self.e2 = 0.00669342
+            self.e2 = 0.00669342162296
 
     def xyz2flh(self, x, y, z):
-        p = sqrt(x**2 + y**2)
-        fi = np.arctan(z/(p*(1 - self.e2)))
+        p = sqrt(x ** 2 + y ** 2)
+        fi = np.arctan(z / (p * (1 - self.e2)))
 
         while True:
             n = nn(fi, self.a, self.e2)
             h = p / cos(fi) - n
             fp = fi
-            fi = np.arctan(z/(p * (1 - self.e2 * n / (n + h))))
-            if abs(fp - fi) < (0.000001/206265):
+            fi = np.arctan(z / (p * (1 - self.e2 * n / (n + h))))
+            if abs(fp - fi) < (0.000001 / 206265):
                 break
 
-            la = np.arctan2(y, x)
-            print(f'Wynik transformacji XYZ -> BLH na elipsoidzie {self.model} to:\n')
-            dms(fi)
-            dms(la)
-            print(f'{h:.3f}')
-            return fi, la, h
+        la = np.arctan2(y, x)
+        print(f'Wynik transformacji XYZ -> BLH na elipsoidzie {self.model} to:\n')
+        dms(fi)
+        dms(la)
+        print(f'{h:.3f}')
+        return fi, la, h
 
     def flh2xyz(self, fi, la, h):
         n = nn(fi, self.a, self.e2)
@@ -72,6 +72,5 @@ test = Transformer('grs80')
 fia, lama, ha = test.xyz2flh(3850700.000, 1658260.000, 4790660.000)
 test.flh2xyz(fia, lama, ha)
 
-# TODO 1 - w xyz2flh jest jakiś błąd, poprawić zeby wyrzucało poprawne wyniki (różnica ok 0.00008'')
-# TODO 2 - przerobic dms tak zeby pokazywal wynik ze znakiem stopien, minuta, sekunda
-# TODO 3 - dodać transformacje do pl2000, pl1992, rneuy
+# TODO 1 - przerobic dms tak zeby pokazywal wynik ze znakiem stopien, minuta, sekunda
+# TODO 2 - dodać transformacje do pl2000, pl1992, rneuy
