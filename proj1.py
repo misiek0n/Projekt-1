@@ -1,6 +1,10 @@
+import numpy as np
+from math import *
+
 class Tranformer():
-    
-    def transform(self,x,y):
-        return x+y
-    
-    # dsdsadasa
+    def __init__(self):
+        self.
+
+
+
+
