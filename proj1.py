@@ -75,6 +75,8 @@ class Transformer:
         if __name__ == "__main__":
             lam0 = radians(19)
             m0 = 0.9993
+            lam = radians(lam)
+            fi = radians(fi)
             b2 = self.a ** 2 * (1 - self.e2)
             ep2 = (self.a ** 2 - b2) / b2
             dl = lam - lam0
