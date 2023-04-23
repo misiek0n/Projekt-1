@@ -21,7 +21,7 @@ def dms(x):
     d = int(x)
     m = int((x - d) * 60)
     s = (x - d - m/60) * 3600
-    print(znak, "%3d %2d %7.5f" % (d, m, s))
+    print(znak, "%3d° %2d' %7.5f\"" % (d, m, s))
 
 
 class Transformer:
