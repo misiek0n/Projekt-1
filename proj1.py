@@ -162,14 +162,17 @@ if __name__ == "__main__":
     z_obl = []
     if args.fun == 'xyz2flh' or args.fun == 'flh2xyz':
         for i in s:
-            if '\n' in i:
-                i = i.strip('\n')
-                i = i.split(' ')
-            else:
-                i = i.split(' ')
-            wsp_x.append(float(i[0]))
-            wsp_y.append(float(i[1]))
-            wsp_z.append(float(i[2]))
+            try:
+                if '\n' in i:
+                    i = i.strip('\n')
+                    i = i.split(' ')
+                else:
+                    i = i.split(' ')
+                wsp_x.append(float(i[0]))
+                wsp_y.append(float(i[1]))
+                wsp_z.append(float(i[2]))
+            except ValueError:
+                pass
         for i in range(0, len(wsp_x)):
             if args.fun == 'xyz2flh':
                 x, y, z = test.xyz2flh(wsp_x[i], wsp_y[i], wsp_z[i])
@@ -180,13 +183,16 @@ if __name__ == "__main__":
             z_obl.append(z)
     elif args.fun == 'pl1992' or args.fun == 'pl2000' or args.fun == 'neu':
         for i in s:
-            if '\n' in i:
-                i = i.strip('\n')
-                i = i.split(' ')
-            else:
-                i = i.split(' ')
-            wsp_x.append(float(i[0]))
-            wsp_y.append(float(i[1]))
+            try:
+                if '\n' in i:
+                    i = i.strip('\n')
+                    i = i.split(' ')
+                else:
+                    i = i.split(' ')
+                wsp_x.append(float(i[0]))
+                wsp_y.append(float(i[1]))
+            except ValueError:
+                pass
         for i in range(0, len(wsp_x)):
             if args.fun == 'pl1992' or args.fun == 'pl2000':
                 if args.fun == 'pl1992':
