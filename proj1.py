@@ -3,11 +3,6 @@ from math import *
 import argparse
 
 
-
-
-
-
-
 def dms(x):
     znak = ' '
     if x < 0:
@@ -18,7 +13,6 @@ def dms(x):
     m = int((x - d) * 60)
     s = (x - d - m / 60) * 3600
     print(znak, "%3d°%2d'%7.5f\"" % (d, m, s))
-
 
 
 class Transformer:
@@ -41,7 +35,7 @@ class Transformer:
         fi = np.arctan(z / (p * (1 - self.e2)))
 
         while True:
-            n = self.a / np.sqrt(1 - self.e2 * sin(f)**2)
+            n = self.a / np.sqrt(1 - self.e2 * sin(fi)**2)
             h = p / cos(fi) - n
             fp = fi
             fi = np.arctan(z / (p * (1 - self.e2 * n / (n + h))))
@@ -56,7 +50,7 @@ class Transformer:
         return fi, la, h
 
     def flh2xyz(self, fi, la, h):
-        n = self.a / np.sqrt(1 - self.e2 * sin(f)**2)
+        n = self.a / np.sqrt(1 - self.e2 * sin(fi)**2)
         x = (n + h) * cos(fi) * cos(la)
         y = (n + h) * cos(fi) * sin(la)
         z = (n + h - n * self.e2) * sin(fi)
@@ -74,7 +68,7 @@ class Transformer:
         dl = lam - lam0
         t = tan(fi)
         n2 = ep2 * cos(fi) ** 2
-        n = self.a / np.sqrt(1 - self.e2 * sin(f)**2)
+        n = self.a / np.sqrt(1 - self.e2 * sin(fi)**2)
         a0 = 1 - self.e2 / 4 - 3 * self.e2 ** 2 / 64 - 5 * self.e2 ** 3 / 256
         a2 = (3 / 8) * (self.e2 + self.e2 ** 2 / 4 + 15 * self.e2 ** 3 / 128)
         a4 = (15 / 256) * (self.e2 ** 2 + (3 * self.e2 ** 3) / 4)
@@ -113,7 +107,7 @@ class Transformer:
         dl = lam - l0
         t = tan(fi)
         n2 = ep2 * cos(fi) ** 2
-        n = self.a / np.sqrt(1 - self.e2 * sin(f)**2)
+        n = self.a / np.sqrt(1 - self.e2 * sin(fi)**2)
         a0 = 1 - self.e2 / 4 - 3 * self.e2 ** 2 / 64 - 5 * self.e2 ** 3 / 256
         a2 = (3 / 8) * (self.e2 + self.e2 ** 2 / 4 + 15 * self.e2 ** 3 / 128)
         a4 = (15 / 256) * (self.e2 ** 2 + (3 * self.e2 ** 3) / 4)
@@ -208,7 +202,7 @@ if __name__ == "__main__":
                 z_obl.append(z)
     zapis = open('wsp_obliczone.txt', 'w')
     for i in range(0, len(x_obl)):
-        if z_obl != []:
+        if z_obl:
             zapis.writelines(f'{x_obl[i]} {y_obl[i]} {z_obl[i]}\n')
         else:
             zapis.writelines(f'{x_obl[i]} {y_obl[i]}\n')
