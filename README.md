@@ -32,7 +32,3 @@ Nazwy obsługiwanych funkcji:
 -pl1992 (przelicza współrzędne Fi, Lambda do układu PL1992)
 -pl2000 (przelicza współrzędne Fi, Lambda do układu PL2000)
 -neu (przelicza współrzędne Fi, Lambda do układu NEU)
-
-Znane błędy:
-W przypadku, gdy w pliku ze współrzędnymi na końcu znajduje się więcej niż jedna pusta linia program wyrzuci błąd zamiany zmiennej typu string na float.
-
