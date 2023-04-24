@@ -22,13 +22,13 @@ W celu wywołania funkcji należy użyć komendy:
 python -m proj1 nazwaelipsoidy nazwafunkcji nazwapliku.txt
 
 Nazwy obsługiwanych elipsoid:
-	-grs80
-	-wgs84
-	-krasowski
+-grs80
+-wgs84
+-krasowski
 
 Nazwy obsługiwanych funkcji:
-	-flh2xyz (przelicza współrzędne Fi, Lambda, H na współrzędne X, Y, Z)
-	-xyz2flh (przelicza współrzędne X, Y, Z na współrzędne Fi, Lambda, H)
-	-pl1992 (przelicza współrzędne Fi, Lambda do układu PL1992)
-	-pl2000 (przelicza współrzędne Fi, Lambda do układu PL2000)
-	-neu (przelicza współrzędne Fi, Lambda do układu NEU)
+-flh2xyz (przelicza współrzędne Fi, Lambda, H na współrzędne X, Y, Z)
+-xyz2flh (przelicza współrzędne X, Y, Z na współrzędne Fi, Lambda, H)
+-pl1992 (przelicza współrzędne Fi, Lambda do układu PL1992)
+-pl2000 (przelicza współrzędne Fi, Lambda do układu PL2000)
+-neu (przelicza współrzędne Fi, Lambda do układu NEU)
