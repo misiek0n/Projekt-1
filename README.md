@@ -21,6 +21,8 @@ W celu wywołania funkcji należy użyć komendy:
 
 python -m proj1 nazwaelipsoidy nazwafunkcji nazwapliku.txt
 
+Zamiast nazwy pliku użytkownik może też podać ścieżke do jego lokalizacji.
+
 Nazwy obsługiwanych elipsoid:
 -grs80
 -wgs84
