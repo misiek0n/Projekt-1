@@ -39,6 +39,8 @@ class Transformer:
         elif model == 'krasowski':
             self.a = 6378245
             self.e2 = 0.00669342162296
+        else:
+            raise NotImplementedError(f"{model} nie ma takiego modelu :( ")
 
     def xyz2flh(self, x, y, z):
         if __name__ == "__main__":
