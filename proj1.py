@@ -16,7 +16,7 @@ def dms(x):
 
 
 class Transformer:
-    def __init__(self, model):
+    def __init__(self, model:str = "wgs84"):
         """
         Parametry elipsoid:
             a - duża półoś elipsoidy - promień równikowy
@@ -243,7 +243,7 @@ class Transformer:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Przeliczanie współrzędnych')
     parser.add_argument('model', type=str.lower,
-                        help='Model elipsoidy odniesienia. obslugiwane modele: grs80/wgs84/krasowski',
+                        help='Model elipsoidy odniesienia. obslugiwane modele: grs80/wgs84/krasowski, domyslny model: wgs84',
                         choices=['grs80', 'wgs84', 'krasowski'])
     parser.add_argument('fun', type=str.lower, help='Nazwa wykonywanej funkcji',
                         choices=['flh2xyz', 'xyz2flh', 'pl2000', 'pl1992', 'neu'])
