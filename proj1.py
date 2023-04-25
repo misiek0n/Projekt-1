@@ -23,6 +23,11 @@ def dms(x):
 
 class Transformer:
     def __init__(self, model):
+        """
+        Parametry elipsoid:
+            a - duża półoś elipsoidy - promień równikowy
+            b - mała półoś elipsoidy - promień południkowy
+        """
         self.model = model
         if model == 'grs80':
             self.a = 6378137
@@ -37,6 +42,27 @@ class Transformer:
             raise NotImplementedError(f"{model} nie ma takiego modelu :( ")
 
     def xyz2flh(self, x, y, z):
+        """
+        Algorytm Hirvonena - algorytm transformacji współrzędnych ortokartezjańskich (x, y, z)
+        na współrzędne geodezyjne długość szerokość i wysokośc elipsoidalna (phi, lam, h). Jest to proces iteracyjny. 
+        W wyniku 3-4-krotneej iteracji wyznaczenia wsp. phi można przeliczyć współrzędne z dokładnoscią ok 1 cm.     
+        Parameters
+        ----------
+        X, Y, Z : FLOAT
+             współrzędne w układzie orto-kartezjańskim, 
+
+        Returns
+        -------
+        latfi
+            [stopnie dziesiętne] - szerokość geodezyjna
+        la
+            [stopnie dziesiętne] - długośc geodezyjna.
+        h : TYPE
+            [metry] - wysokość elipsoidalna
+        output [STR] - optional, defoulf 
+            dec_degree - decimal degree
+            dms - degree, minutes, sec
+        """
         p = sqrt(x ** 2 + y ** 2)
         fi = np.arctan(z / (p * (1 - self.e2)))
 
@@ -56,6 +82,23 @@ class Transformer:
         return fi, la, h
 
     def flh2xyz(self, fi, la, h):
+        """
+        Algorytm transformacji współrzędnych geodezyjnych (phi, lam, h)
+        na współrzędne kartezjańskie (phi, lam, h). Współrzędne obliczane są przez podstawienie parametrów wejciowych do wektora normalnego
+        Parameters
+        ----------
+        X, Y, Z : FLOAT
+             współrzędne w układzie orto-kartezjańskim, 
+
+        Returns
+        -------
+        x
+            [metry] - wartosc na pierwszej osi
+        y
+            [metry] - wartosć na drugiej osi
+        z : 
+            [metry] - wartosć na trzeciej osi
+        """
         n = self.a / np.sqrt(1 - self.e2 * sin(f)**2)
         x = (n + h) * cos(fi) * cos(la)
         y = (n + h) * cos(fi) * sin(la)
@@ -67,6 +110,24 @@ class Transformer:
         return x, y, z
 
     def pl1992(self, fi, lam):
+        """
+        Algorytm transformacji współrzędnych geodezyjnych (fi, lam,)
+        na współrzędne płaskie prostokątne (x, y) w ukladzie PL-1992. Współrzędne obliczane stosując odwzorowanie Gaussa-Krugera 
+        w jednej 10stopniowej strefie o południku osiowym 19°E.
+        skala m0 = 0.9993
+        Parameters
+        ----------
+        fi, lam: FLOAT
+             współrzędne geodezyjne, 
+
+        Returns
+        -------
+        x
+            [metry] - wartosc na pierwszej osi
+        y
+            [metry] - wartosć na drugiej osi
+       
+        """
         lam0 = radians(19)
         m0 = 0.9993
         b2 = self.a ** 2 * (1 - self.e2)
@@ -93,6 +154,24 @@ class Transformer:
         return x92, y92
 
     def pl2000(self, fi, lam):
+        """
+        Algorytm transformacji współrzędnych geodezyjnych (fi, lam,)
+        na współrzędne płaskie prostokątne (x, y) w układzie PL-2000. Współrzędne obliczane stosując odwzorowanie Gaussa-Krugera 
+        w czterech 3 stopniowych strefach o południkach osiowych 15°E, 18°E, 21°E i 24°E,oznaczone kolejno numerami: 5,6,7,8.
+        skala m0 = 0.999923
+        Parameters
+        ----------
+        fi, lam: FLOAT
+             współrzędne geodezyjne, 
+
+        Returns
+        -------
+        x
+            [metry] - wartosc na pierwszej osi
+        y
+            [metry] - wartosć na drugiej osi
+       
+        """
         lam = degrees(lam)
         if lam <= 16.5:
             l0 = radians(15)
@@ -134,6 +213,25 @@ class Transformer:
         return x2000, y2000
 
     def neu(self, fi, lam):
+        """
+        Algorytm transformacji współrzędnych geodezyjnych (fi, lam,)
+        na współrzędne wektorowe (n,e,u) w układzie topocentrycznym. Współrzędne obliczane są poprzez podstawienie do 
+        macierzy obrotu R (składającej się z wzorów 3 wektorów) współrzędnych geodezyjnych
+        Parameters
+        ----------
+        fi, lam: FLOAT
+             współrzędne geodezyjne, 
+
+        Returns
+        -------
+        n
+            [metry] - wartosc pierwszego wektora
+        e
+            [metry] - wartosć drugiego wektora
+        u
+            [metry] - wartosć trzeciego wektora
+       
+        """
         r = np.array([[-sin(fi) * cos(lam), -sin(lam), cos(fi) * cos(lam)],
                       [-sin(fi) * sin(lam), cos(lam), cos(fi) * sin(lam)],
                       [cos(fi), 0, sin(fi)]])
