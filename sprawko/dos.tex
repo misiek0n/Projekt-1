@@ -7,6 +7,7 @@
 \section{Przebieg ćwiczenia}
 
 \begin{flushleft}
+<<<<<<< HEAD
 	\hspace{1cm}Do stworzenia programu wykorzystano funkcje wykonujące transformacjie stworzone na potrzeby Geodezji Wyższej I w semestrze 3. Wszystkie funckje zostały użyte jako metody pod klasą: Transformacje w celu umożliwenia sprawnego przeliczania współrzędnych z wykorzystaniem różnych modeli elipsoid. W tym celu wykorzystano metodę \textbf{init}, a zmienne zależne od elipsoid zapisano z wykorzystaniem odwołania \textbf{self}, tak aby metody mogły "pobrać" parametry elipsoidy wybranej przez użytkownika. W celu zwiększenia czytleności kodu zastosowano wyrażenie warunkowe: \textbf{if name == "main":}. W przypadku wprowadzenia nieprawidłowego modely elipsoidy program wyśle informację zwrotną z popełnionym błędem. Wykorzystano również bibliotekę argparse, dzięki której program może być wykorzystany z poziomu wiersza poleceń. Usprawnienie pracy i koordynacji w zespole było możliwe poprzez wykorzystanie wirtualnego repozytorium z portalu git.hub, które umożliwiało połączenie lokalnych repozytorium.
 \end{flushleft}
 
@@ -14,4 +15,9 @@
 
 \begin{flushleft}
 	\hspace{1cm} W celu poprawnego wczytania danych do programu plik .txt musi mieć odpowiedni format
+=======
+	\hspace{1cm}Do stworzenia programu wykorzystano funkcje wykonujące transformacjie stworzone na potrzeby Geodezji Wyższej I w semestrze 3. Wszystkie funckje zostały użyte jako metody pod klasą: Transformacje w celu umożliwenia sprawnego przeliczania współrzędnych z wykorzystaniem różnych modeli elipsoid. W tym celu wykorzystano metodę \textbf{init}, a zmienne zależne od elipsoid zapisano z wykorzystaniem odwołania \textbf{self}, tak aby metody mogły "pobrać" parametry elipsoidy wybranej przez użytkownika. W celu zwiększenia czytleności kodu zastosowano wyrażenie warunkowe: \textbf{if name == "main":}. W przypadku wprowadzenia nieprawidłowego modely elipsoidy program wyśle informację zwrotną z popełnionym błędem.
+	\newline
+	\hspace{1cm}Podczas tworzenia programu napotkaliśmy problem z odczytem współrzędnych wielu punktów z pliku. W przypadku gdy użytkownik na końcu pliku ze współrzędnymi wejściowymi utworzył zbyt dużo pustych linii otrzymywaliśmy błąd zamiany zmiennej typu string na float. Problem ten udało nam się rozwiązać stosując klauzulę \textbf{try...except}. Dzięki zastosowaniu tej klauzuli udało się również uniknąć błędnego działania programu w przypadku gdy użytkownik utworzy puste linie w dowolnym miejscu w pliku ze współrzędnymi wejściowymi.
+>>>>>>> ce78faa736f04ab9bf727d8efed13e999b931fd9
 \end{flushleft}
