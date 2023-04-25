@@ -285,9 +285,11 @@ if __name__ == "__main__":
             try:
                 if '\n' in i:
                     i = i.strip('\n')
-                    i = i.split(' ')
+                    i = i.strip(' ')
+                    i = i.split(';')
                 else:
-                    i = i.split(' ')
+                    i = i.strip(' ')
+                    i = i.split(';')
                 wsp_x.append(float(i[0]))
                 wsp_y.append(float(i[1]))
             except ValueError:
