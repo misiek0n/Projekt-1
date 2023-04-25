@@ -16,11 +16,12 @@ def dms(x):
 
 
 class Transformer:
-    def __init__(self, model:str = "wgs84"):
+    def __init__(self, model):
         """
         Parametry elipsoid:
             a - duża półoś elipsoidy - promień równikowy
             b - mała półoś elipsoidy - promień południkowy
+            Domyslna elipsoida: grs80
         """
         self.model = model
         if model == 'grs80':
@@ -242,9 +243,9 @@ class Transformer:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Przeliczanie współrzędnych')
-    parser.add_argument('model', type=str.lower,
-                        help='Model elipsoidy odniesienia. obslugiwane modele: grs80/wgs84/krasowski, domyslny model: wgs84',
-                        choices=['grs80', 'wgs84', 'krasowski'])
+    parser.add_argument('model',type=str.lower,nargs='?', default = 'grs80',
+                        help='Model elipsoidy odniesienia. obslugiwane modele: grs80/wgs84/krasowski, domyslny model: grs80',
+                        choices=['grs80', 'wgs84', 'krasowski', 'none'])
     parser.add_argument('fun', type=str.lower, help='Nazwa wykonywanej funkcji',
                         choices=['flh2xyz', 'xyz2flh', 'pl2000', 'pl1992', 'neu'])
     parser.add_argument('plik', type=str.lower, help='Nazwa pliku ze współrzędnymi.')
