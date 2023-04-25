@@ -243,15 +243,18 @@ class Transformer:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Przeliczanie współrzędnych')
-    parser.add_argument('model',type=str.lower,nargs='?', default = 'grs80',
-                        help='Model elipsoidy odniesienia. obslugiwane modele: grs80/wgs84/krasowski, domyslny model: grs80',
-                        choices=['grs80', 'wgs84', 'krasowski', 'none'])
-    parser.add_argument('fun', type=str.lower, help='Nazwa wykonywanej funkcji',
+    parser.add_argument('-md', '--model',type=str.lower,nargs='?', default = 'grs80',
+                        help='Model elipsoidy odniesienia. obslugiwane modele: grs80/wgs84/krasowski, domyslny model: grs80',)
+    parser.add_argument('-f', '--fun', type=str.lower, help='Nazwa wykonywanej funkcji',
                         choices=['flh2xyz', 'xyz2flh', 'pl2000', 'pl1992', 'neu'])
-    parser.add_argument('plik', type=str.lower, help='Nazwa pliku ze współrzędnymi.')
+    parser.add_argument('-p', '--plik', type=str.lower, help='Nazwa pliku ze współrzędnymi.')
     args = parser.parse_args()
-
-    test = Transformer(args.model)
+    try:
+        test = Transformer(args.model)
+    except:
+        if True:
+            test = Transformer('grs80')
+            print(f'Wybrano nieobsługiwany model elipsoidy. Wykonuje przeliczenie dla elipsoidy GRS80')
     f = open(args.plik, 'r')
     s = f.readlines()
     wsp_x = []
