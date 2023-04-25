@@ -36,7 +36,8 @@ Wywoływanie funkcji:
 
 W celu wywołania funkcji należy użyć komendy:
 
-		python -m proj1 nazwaelipsoidy nazwafunkcji nazwapliku.txt
+		python -m proj1 -md nazwaelipsoidy -f nazwafunkcji -p nazwapliku.txt
+		
 
 Zamiast nazwy pliku użytkownik może też podać ścieżke do jego lokalizacji.
 
@@ -61,4 +62,12 @@ Nazwy obsługiwanych funkcji:
 - pl2000 (przelicza współrzędne Fi, Lambda do układu PL2000)
 
 - neu (przelicza współrzędne Fi, Lambda do układu NEU)
+
+W przypadku gdy użytkownik wprowadzi niepoprawną nazwę elipsoidy program wykona przeliczenie dla elipsoidy GRS80
+
+3. Znane błędy, które nie zostały naprawione
+
+W przypadku gdy użytkownik wprowadzi nazwe funkcji która nie jest obsługiwana, otrzyma błąd:
+
+		proj1.py: error: argument fun: invalid choice: 'neu1' (choose from 'flh2xyz', 'xyz2flh', 'pl2000', 'pl1992', 'neu')
 
