@@ -252,7 +252,7 @@ if __name__ == "__main__":
     try:
         test = Transformer(args.model)
     except:
-        if True:
+        if args.model != ('grs80' or 'krasowski' or 'wgs84'):
             test = Transformer('grs80')
             print(f'Wybrano nieobsługiwany model elipsoidy. Wykonuje przeliczenie dla elipsoidy GRS80')
     f = open(args.plik, 'r')
