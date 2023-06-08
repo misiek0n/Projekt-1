@@ -25,10 +25,58 @@ Obsługiwane systemy:
 Do działania programu konieczne jest utworzenie pliku ze współrzędnymi z rozszerzeniem txt.
 W pliku ze współrzędnymi muszą znajdować się współrzędne oddzielone średnikiem, każdy kolejny punkt musi znajdować się w nowym wierszu.
 
-Przykładowy format pliku txt:
+Przykładowe formaty plików txt wraz z opisem kolejnych kolumn dla poszczególnych funckji:
+- flh2xyz:
+	- Współrzędna Fi punktu wyrażona w stopniach
+	- Współrzędna Lambda punktu wyrażona w stopniach
+	- Współrzędna h punktu wyrażona w metrach		
 
-		123.13;456.45;567.67
-		100.10;431.432;432.432
+	Przykładowy plik ze współrzędnymi:
+	
+		>123.13;456.45;567.67  
+		>100.10;431.432;432.432
+
+- xyz2flh:
+	- Współrzędna X punktu wyrażona w metrach
+	- Współrzędna Y punktu wyrażona w metrach
+	- Współrzędna Z punktu wyrażona w metrach		
+
+	Przykładowy plik ze współrzędnymi:
+	
+		>123.13;456.45;567.67  
+		>100.10;431.432;432.432
+		
+- pl2000:
+	- Współrzędna Fi punktu wyrażona w stopniach
+	- Współrzędna Lambda punktu wyrażona w stopniach
+	- Numer strefy w której znajduje się punkt		
+
+	Przykładowy plik ze współrzędnymi:
+	
+		>123.13;456.45;567.67  
+		>100.10;431.432;432.432
+	
+- pl1992:
+	- Współrzędna Fi punktu wyrażona w stopniach
+	- Współrzędna Lambda punktu wyrażona w stopniach		
+
+	Przykładowy plik ze współrzędnymi:
+	
+		>123.13;456.45;567.67  
+		>100.10;431.432;432.432
+		
+- neu: 
+	- Współrzędna X punktu A wyrażona w metrach
+	- Współrzędna Y punktu A wyrażona w metrach
+	- Współrzędna Z punktu A wyrażona w metrach
+	- Współrzędna X punktu B wyrażona w metrach
+	- Współrzędna Y punktu B wyrażona w metrach
+	- Współrzędna Z punktu B wyrażona w metrach  		
+
+	Przykładowy plik ze współrzędnymi:
+	
+		>123.13;456.45;567.67  
+		>100.10;431.432;432.432
 
 W celu wywołania programu konieczne jest uruchomienie wiersza poleceń w lokalizacji, w której znajduje się program.
 
@@ -64,6 +112,69 @@ Nazwy obsługiwanych funkcji:
 - neu (przelicza współrzędne Fi, Lambda do układu NEU)
 
 W przypadku gdy użytkownik wprowadzi niepoprawną nazwę elipsoidy program wykona przeliczenie dla elipsoidy GRS80
+
+Przykładowe wywołania fukcji wraz z przykładowym wyglądem pliku wynikowego współrzędnych po transformacji:
+
+-flh2xyz:
+
+			python -m proj1 -md grs80 -f flh2xyz -p wsp.txt
+				
+Wygląd pliku ze współrzędnymi po transformacji, gdzie w kolejnych kolumnach znajdują się:
+	- Współrzędna X punktu wyrażona w metrach,
+	- Współrzędna Y punktu wyrażona w metrach,
+	- Współrzędna Z punktu wyrażona w metrach
+	
+		>123.13;456.45;567.67  
+		>100.10;431.432;432.432
+		
+- xyz2flh:
+
+			python -m proj1 -md grs80 -f xyz2flh -p wsp.txt
+				
+Wygląd pliku ze współrzędnymi po transformacji, gdzie w kolejnych kolumnach znajdują się:
+	- Współrzędna Fi punktu wyrażona w stopniach,
+	- Współrzędna Lambda punktu wyrażona w stopniach,
+	- Współrzędna h punktu wyrażona w metrach
+	
+		>123.13;456.45;567.67  
+		>100.10;431.432;432.432
+
+-pl2000:
+
+			python -m proj1 -md grs80 -f pl2000 -p wsp.txt
+				
+Wygląd pliku ze współrzędnymi po transformacji, gdzie w kolejnych kolumnach znajdują się:
+	- Współrzędna X punktu w układzie 2000 wyrażona w metrach,
+	- Współrzędna Y punktu w układzie 2000 wyrażona w metrach
+	
+		>123.13;456.45;567.67  
+		>100.10;431.432;432.432
+		
+
+-pl1992
+
+			python -m proj1 -md grs80 -f pl2000 -p wsp.txt
+				
+Wygląd pliku ze współrzędnymi po transformacji, gdzie w kolejnych kolumnach znajdują się:
+	- Współrzędna X punktu w układzie 1992 wyrażona w metrach,
+	- Współrzędna Y punktu w układzie 1992 wyrażona w metrach
+	
+		>123.13;456.45;567.67  
+		>100.10;431.432;432.432
+		
+	
+-neu
+
+			python -m proj1 -md grs80 -f neu -p wsp.txt
+				
+Wygląd pliku ze współrzędnymi po transformacji, gdzie w kolejnych kolumnach znajdują się:
+	- Współrzędna N punktu wyrażona w metrach,
+	- Współrzędna E punktu wyrażona w metrach,
+	- Współrzędna U punktu wyrażona w metrach
+	
+		>123.13;456.45;567.67  
+		>100.10;431.432;432.432
+		
 
 3. Znane błędy, które nie zostały naprawione
 
